@@ -1,0 +1,17 @@
+.buttonContainer {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .SingUp, .LogIn {
+    border-radius: 10px;
+    border: 2px solid white;
+    padding: 10px;
+    transition: all 0.5s ease;
+  }
+
+  .SingUp:hover, .LogIn:hover {
+    background-color: white;
+    box-shadow: 0 0 5px white;
+    color: black;
+  }
