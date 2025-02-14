@@ -3,32 +3,32 @@ import Image from "next/image";
 const categories = [
   {
     title: "Ancient Grimoires",
-    image: "/images/grimoire.jpg",
+    image: "/assets/book.png",
     description: "Books of spells, alchemy, and lost magical knowledge.",
   },
   {
     title: "Mythical Tales",
-    image: "/images/myths.jpg",
+    image: "/assets/book.png",
     description: "Legends of dragons, heroes, and forgotten kingdoms.",
   },
   {
     title: "Potion Recipes",
-    image: "/images/potions.jpg",
+    image: "/assets/book.png",
     description: "Brewing guides for elixirs of power and longevity.",
   },
   {
     title: "Divination & Prophecy",
-    image: "/images/prophecy.jpg",
+    image: "/assets/book.png",
     description: "Unveil the future with tarot, runes, and star charts.",
   },
   {
     title: "Dark Arts & Curses",
-    image: "/images/dark_magic.jpg",
+    image: "/assets/book.png",
     description: "Forbidden texts filled with dangerous knowledge.",
   },
   {
     title: "Magical Creatures",
-    image: "/images/magical_beasts.jpg",
+    image: "/assets/book.png",
     description: "A bestiary of enchanted beings and their secrets.",
   },
 ];

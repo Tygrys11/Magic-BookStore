@@ -12,6 +12,9 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      screens:{
+        'lg-custom':'900px',
+      }
     },
   },
   plugins: [],

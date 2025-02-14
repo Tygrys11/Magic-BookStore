@@ -1,3 +1,5 @@
+"use client"
+import { useEffect, useState } from "react";
 import {
   Disclosure,
   DisclosureButton,
@@ -6,7 +8,7 @@ import {
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Buttons } from "../Buttons";
 import styles from "../../styles/navbar.module.css";
-import Banner from "../Banner"; // Importowanie komponentu Banner
+import Banner from "../Banner";
 
 const navigation = [
   { name: "Home", href: "#", current: false },
@@ -20,18 +22,36 @@ function classNames(...classes: string[]) {
 }
 
 export default function Navbar() {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <>
       {/* Navbar */}
       <Disclosure
         as="nav"
-        className="bg-transparent sticky top-0 z-50 backdrop-blur-md"
+        className={`fixed top-0 w-full z-50 backdrop-blur-md transition-all duration-300 ${
+          scrolled ? "bg-indigo-950 bg-opacity-90 shadow-lg" : "bg-transparent"
+        }`}
       >
         <div className="mx-auto max-w-7xl px-2 md:px-6 lg:px-8">
           <div className="relative flex h-16 items-center justify-between">
+
             {/* Hamburger Menu - Right side */}
-            <div className="absolute inset-y-0 right-0 flex items-center md:hidden">
-              <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-white focus:outline-none focus:ring-inset">
+            <div className="absolute inset-y-0 right-0 flex items-center lg-custom:hidden">
+              <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-2 text-gray-500 hover:bg-purple-950 hover:text-white focus:ring-2 focus:ring-white focus:outline-none focus:ring-inset">
                 <span className="absolute -inset-0.5" />
                 <span className="sr-only">Open main menu</span>
                 <Bars3Icon
@@ -54,7 +74,7 @@ export default function Navbar() {
             </div>
 
             {/* Desktop Navigation Links */}
-            <div className="hidden md:ml-6 md:block">
+            <div className="hidden lg-custom:ml-6 lg-custom:block">
               <div className="flex space-x-4">
                 {navigation.map((item) => (
                   <a
@@ -75,7 +95,7 @@ export default function Navbar() {
             </div>
 
             {/* Desktop Buttons */}
-            <div className="hidden md:flex md:ml-6">
+            <div className="hidden lg-custom:flex lg-custom:ml-6">
               <div className={styles.buttonContainer}>
                 <Buttons className={styles.SignUp}>
                   Sign Up
@@ -89,7 +109,7 @@ export default function Navbar() {
         </div>
 
         {/* Mobile Menu */}
-        <DisclosurePanel className="md:hidden">
+        <DisclosurePanel className="lg-custom:hidden">
           <div className="space-y-1 px-2 pt-2 pb-3 text-center">
             {navigation.map((item) => (
               <DisclosureButton
@@ -109,16 +129,16 @@ export default function Navbar() {
             ))}
             {/* Mobile Buttons */}
             <div className="mt-4 space-y-2">
-              <Buttons className="bg-yellow-500 hover:bg-yellow-600 text-black font-bold w-full py-2 px-4 rounded">
+              <Buttons className={`${styles.SignUp} py-2 px-4 w-full rounded`}>
                 Sign Up
               </Buttons>
               <br />
-              <Buttons className={styles.logIn}>Log In</Buttons>
+              <Buttons className={`${styles.logIn} w-full`}>Log In</Buttons>
             </div>
           </div>
         </DisclosurePanel>
       </Disclosure>
-
+      <br /><br />
       {/* Banner below the Navbar */}
       <Banner />
     </>
