@@ -138,7 +138,9 @@ export default function Navbar() {
           </div>
         </DisclosurePanel>
       </Disclosure>
+      
       <br /><br />
+
       {/* Banner below the Navbar */}
       <Banner />
     </>

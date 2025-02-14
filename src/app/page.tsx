@@ -1,3 +1,4 @@
+import Footer from "./components/Footer/Footer";
 import { AboutUs } from "./components/Home/AboutUs";
 import MagicBookCategories from "./components/Home/MagicBookCategories";
 import MagicalFeatures from "./components/Home/MagicalFeatures";
@@ -10,6 +11,8 @@ export default function Home() {
       <MagicalFeatures />
       <AboutUs />
       <MagicBookCategories />
+
+      <Footer />
     </>
   );
 }
