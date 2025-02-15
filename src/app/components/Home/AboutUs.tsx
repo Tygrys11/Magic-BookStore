@@ -1,5 +1,6 @@
+import { Images } from "lucide-react";
 import styles from "../../styles/aboutus.module.css";
-import {Image} from "../Image";
+import {ImagesComponent} from "../ImageComponent";
 export function AboutUs() {
   return (
     <>
@@ -37,7 +38,7 @@ export function AboutUs() {
           </a>
         </div>
         <div className={styles.image}>
-          <Image src="/assets/magicalLibrary.jpg" alt="Bookstore" />
+          <ImagesComponent src="/assets/magicalLibrary.jpg" alt="Bookstore" />
         </div>
       </div>
     </>

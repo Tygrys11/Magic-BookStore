@@ -7,6 +7,17 @@ export function Footer() {
     <footer>
       <div className="container">
         <div className="row">
+        <div className="footer-col">
+            <h4>Please Contact Us</h4>
+            <ul>
+              <li>
+                <div className="telNumber">+48 000 000 000</div>
+              </li>
+              <li>
+                bookstore@magicalBooks.pl
+              </li>
+            </ul>
+          </div>
           <div className="footer-col">
             <h4>Discover</h4>
             <ul>
@@ -81,7 +92,11 @@ export function Footer() {
               </a>
             </div>
           </div>
+          
         </div>
+        <br />
+        <hr />
+        <div className="copyright">Copyright © 2025 MagicBookStore</div>
       </div>
     </footer>
   );

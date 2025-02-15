@@ -58,6 +58,13 @@ body {
   box-sizing: border-box;
 }
 
+.footer-col .telNumber {
+  color: yellow;
+  font-size: 1.3em;
+  font-weight: bold;
+
+}
+
 /* Linki w stopce */
 .footer-col ul li:not(:last-child) {
   margin-bottom: 10px;
@@ -130,6 +137,7 @@ footer.fixed {
   color: white;
   z-index: 1000;
 }
+
 .social-links {
   display: flex;
   gap: 10px; /* Odstęp między ikonami */
@@ -153,4 +161,12 @@ footer.fixed {
 
 .social-icon svg {
   margin: 9.5; /* usuwa marginesy wokół ikon */
+}
+
+.copyright {
+  margin: 20px;
+}
+
+hr{
+  width: 100%;
 }
