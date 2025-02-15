@@ -1,5 +1,7 @@
 "use client"
 import { useEffect, useState } from "react";
+import Link from "next/link"; // Importujemy Link z Next.js
+import { usePathname } from "next/navigation"; // Use usePathname from next/navigation instead of next/router
 import {
   Disclosure,
   DisclosureButton,
@@ -11,10 +13,10 @@ import styles from "../../styles/navbar.module.css";
 import Banner from "../Banner";
 
 const navigation = [
-  { name: "Home", href: "#", current: false },
-  { name: "Books", href: "#", current: false },
-  { name: "About Us", href: "#", current: false },
-  { name: "Contact", href: "#", current: false },
+  { name: "Home", href: "/" },
+  { name: "Books", href: "/books" },
+  { name: "About Us", href: "/aboutus" },
+  { name: "Contact", href: "/contact" },
 ];
 
 function classNames(...classes: string[]) {
@@ -23,6 +25,7 @@ function classNames(...classes: string[]) {
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname(); // Use usePathname hook for pathname
 
   useEffect(() => {
     const handleScroll = () => {
@@ -77,19 +80,19 @@ export default function Navbar() {
             <div className="hidden lg-custom:ml-6 lg-custom:block">
               <div className="flex space-x-4">
                 {navigation.map((item) => (
-                  <a
+                  <Link
                     key={item.name}
                     href={item.href}
-                    aria-current={item.current ? "page" : undefined}
+                    aria-current={pathname === item.href ? "page" : undefined}
                     className={classNames(
-                      item.current
+                      pathname === item.href
                         ? "bg-indigo-950 text-white"
                         : "text-gray-300 hover:bg-indigo-950 hover:text-yellow-400",
                       "rounded-md px-3 py-2 text-sm font-medium"
                     )}
                   >
                     {item.name}
-                  </a>
+                  </Link>
                 ))}
               </div>
             </div>
@@ -112,19 +115,19 @@ export default function Navbar() {
         <DisclosurePanel className="lg-custom:hidden">
           <div className="space-y-1 px-2 pt-2 pb-3 text-center">
             {navigation.map((item) => (
-              <DisclosureButton
-                key={item.name}
-                as="a"
-                href={item.href}
-                aria-current={item.current ? "page" : undefined}
-                className={classNames(
-                  item.current
-                    ? "bg-gray-900 text-white"
-                    : "text-gray-300 hover:bg-gray-800 hover:text-purple-400",
-                  "block rounded-md px-3 py-2 text-base font-medium w-full hover:bg-gray-700"
-                )}
-              >
-                {item.name}
+              <DisclosureButton key={item.name} as="a">
+                <Link
+                  href={item.href}
+                  aria-current={pathname === item.href ? "page" : undefined}
+                  className={classNames(
+                    pathname === item.href
+                      ? "bg-gray-900 text-white"
+                      : "text-gray-300 hover:bg-gray-800 hover:text-purple-400",
+                    "block rounded-md px-3 py-2 text-base font-medium w-full hover:bg-gray-700"
+                  )}
+                >
+                  {item.name}
+                </Link>
               </DisclosureButton>
             ))}
             {/* Mobile Buttons */}
@@ -138,7 +141,7 @@ export default function Navbar() {
           </div>
         </DisclosurePanel>
       </Disclosure>
-      
+
       <br /><br />
 
       {/* Banner below the Navbar */}
