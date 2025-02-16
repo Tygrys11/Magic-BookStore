@@ -11,7 +11,7 @@ export function ContactComponent() {
         <div className={styles.maindescription}>
           <b>
             <u>Welcome to the Magic Bookstore Contact Section!</u>✨
-          </b>{" "}
+          </b>
           We’re here to happily dispel all your doubts like a puff of enchanted
           smoke. If you have any questions about orders, our magical books, or
           any other mysterious matter, don’t hesitate – reach out to us! Our
@@ -92,7 +92,7 @@ export function ContactComponent() {
               <b>Phone Number:</b> +48 000 000 000
             </p>
             <p>
-              <b>Email:</b>{" "}
+              <b>Email:</b>
               <a href="mailto:bookstore@magicalBooks.pl">
               bookstore@magicalBooks.pl
               </a>
@@ -101,7 +101,7 @@ export function ContactComponent() {
 
           {/* 🌐 Media Społecznościowe */}
           <div className={styles.locationInfo}>
-            <h3 className={styles.infoTitle}>🔮 Magiczne Portale</h3>
+            <h3 className={styles.infoTitle}>🔮 Magic Portals</h3>
             <div className={styles.socialIcons}>
               <a
                 href="https://instagram.com"
