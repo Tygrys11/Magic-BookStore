@@ -33,7 +33,7 @@ export function AboutUs() {
             today!
           </strong>
           <br /><br />
-          <a href="#" className={styles.btn}>
+          <a href="/aboutus" className={styles.btn}>
             Discover More About Us ›
           </a>
         </div>

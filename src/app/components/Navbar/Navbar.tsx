@@ -1,7 +1,7 @@
 "use client"
 import { useEffect, useState } from "react";
-import Link from "next/link"; // Importujemy Link z Next.js
-import { usePathname } from "next/navigation"; // Use usePathname from next/navigation instead of next/router
+import Link from "next/link"; 
+import { usePathname } from "next/navigation"; 
 import {
   Disclosure,
   DisclosureButton,
@@ -25,15 +25,11 @@ function classNames(...classes: string[]) {
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
-  const pathname = usePathname(); // Use usePathname hook for pathname
+  const pathname = usePathname(); 
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
+      setScrolled(window.scrollY > 50);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -42,7 +38,6 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Navbar */}
       <Disclosure
         as="nav"
         className={`fixed top-0 w-full z-50 backdrop-blur-md transition-all duration-300 ${
@@ -100,12 +95,14 @@ export default function Navbar() {
             {/* Desktop Buttons */}
             <div className="hidden lg-custom:flex lg-custom:ml-6">
               <div className={styles.buttonContainer}>
-                <Buttons className={styles.SignUp}>
-                  Sign Up
-                </Buttons>
-                <Buttons className={`${styles.logIn} py-2 px-4 rounded`}>
-                  Log In
-                </Buttons>
+                <Link href="/SignUp">
+                  <Buttons className={styles.SignUp}>Sign Up</Buttons>
+                </Link>
+                <Link href="/LogIn">
+                  <Buttons className={`${styles.logIn} py-2 px-4 rounded`}>
+                    Log In
+                  </Buttons>
+                </Link>
               </div>
             </div>
           </div>
@@ -132,11 +129,17 @@ export default function Navbar() {
             ))}
             {/* Mobile Buttons */}
             <div className="mt-4 space-y-2">
-              <Buttons className={`${styles.SignUp} py-2 px-4 w-full rounded`}>
-                Sign Up
-              </Buttons>
+              <Link href="/SignUp">
+                <Buttons className={`${styles.SignUp} py-2 px-4 w-full rounded`}>
+                  Sign Up
+                </Buttons>
+              </Link>
               <br />
-              <Buttons className={`${styles.logIn} w-full`}>Log In</Buttons>
+              <hr />
+              <p></p>
+              <Link href="/LogIn">
+                <Buttons className={`${styles.logIn} w-full`}>Log In</Buttons>
+              </Link>
             </div>
           </div>
         </DisclosurePanel>

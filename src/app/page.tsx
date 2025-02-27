@@ -11,7 +11,6 @@ export default function Home() {
       <MagicalFeatures />
       <AboutUs />
       <MagicBookCategories />
-
       <Footer />
     </>
   );

@@ -14,12 +14,12 @@ import { useState } from "react";
 
 export function AboutUsComponent() {
   const features = [
-    { icon: <BookOpen size={40} />, title: "Szeroki wybór książek" },
-    { icon: <Tag size={40} />, title: "Atrakcyjne ceny" },
-    { icon: <UserCheck size={40} />, title: "Profesjonalna obsługa klienta" },
-    { icon: <Truck size={40} />, title: "Szybka dostawa" },
-    { icon: <Percent size={40} />, title: "Regularne promocje i rabaty" },
-    { icon: <ShieldCheck size={40} />, title: "Bezpieczna płatność" },
+    { icon: <BookOpen size={40} />, title: "Wide selection of books" },
+    { icon: <Tag size={40} />, title: "Attractive prices" },
+    { icon: <UserCheck size={40} />, title: "Professional customer service" },
+    { icon: <Truck size={40} />, title: "Fast delivery" },
+    { icon: <Percent size={40} />, title: "Regular promotions and discounts" },
+    { icon: <ShieldCheck size={40} />, title: "Secure payment" },
   ];
 
   const [email, setEmail] = useState("");
@@ -97,11 +97,13 @@ export function AboutUsComponent() {
             Forest.
           </p>
           <br />
-          <p className={styles.text2}>
-            Magic Bookstore:</p> Magic Street 24, Enchanted Forest <br /><br />
-            <p className={styles.text2}>Opening hours:</p> Mon – Sun 11:00 AM – 7:00 PM
-          
-          <br /><br />
+          <p className={styles.text2}>Magic Bookstore:</p> Magic Street 24,
+          Enchanted Forest <br />
+          <br />
+          <p className={styles.text2}>Opening hours:</p> Mon – Sun 11:00 AM –
+          7:00 PM
+          <br />
+          <br />
           <p>
             Choose your favorite book and immerse yourself in literary magic at
             its finest!
