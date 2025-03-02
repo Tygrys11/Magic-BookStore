@@ -52,7 +52,7 @@ export function SignUpForm() {
               </div>
 
 
-              <Link href="/">
+              <Link href="/DashHome">
                 <Buttons className={styles.SignUpBtn}>Sign Up</Buttons>
               </Link>
               <div className={styles.SignUpLink}>
