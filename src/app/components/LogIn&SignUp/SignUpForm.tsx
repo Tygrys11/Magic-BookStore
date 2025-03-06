@@ -11,6 +11,7 @@ import { ClerkProvider } from "@clerk/clerk-react";
 export function SignUpForm() {
   return (
     // <SignUp/>
+    //https://temp-mail.org/
     <div className={styles.FullBox}>
       <div className={styles.container}>
         <div className="w-full max-w-md p-8 bg-white rounded-2xl shadow-2xl">
