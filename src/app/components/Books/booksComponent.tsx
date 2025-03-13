@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useEffect, useState } from "react";
 import styles from "../../styles/OtherPagesStyles/books.module.css";
 
@@ -7,37 +7,63 @@ interface Book {
   key: string;
   title: string;
   author_name?: string[]; // Lista autorów, może być undefined
-  cover_i?: number; // Identyfikator okładki książki (jeśli dostępny)
+  cover_i?: number; // Identyfikator okładki książki (jeśli dostępna)
 }
 
 export default function Books() {
-  // Typowanie stanu: books jako tablica Book, loading jako boolean, error jako string | null
-  const [books, setBooks] = useState<Book[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+  const [books, setBooks] = useState<Book[]>([]); // Tablica książek
+  const [loading, setLoading] = useState<boolean>(true); // Stan ładowania
+  const [error, setError] = useState<string | null>(null); // Błąd
+  const [page, setPage] = useState<number>(1); // Numer strony
+  const [totalBooks, setTotalBooks] = useState<number>(0); // Łączna liczba książek
+  const [limit, setLimit] = useState<number>(100); // Limit książek na stronie
 
-  useEffect(() => {
-    // Funkcja do pobierania książek z Open Library API
-    const fetchBooks = async () => {
-      try {
-        const res = await fetch("https://openlibrary.org/search.json?q=fantasy");
-        const data = await res.json();
-
-        // Sprawdzenie, czy istnieją książki w odpowiedzi i aktualizacja stanu
-        if (data.docs) {
-          setBooks(data.docs);
-        }
-        setLoading(false);
-      } catch (err) {
-        setError("Błąd podczas pobierania książek.");
-        setLoading(false);
+  // Funkcja do pobierania książek z Open Library API
+  const fetchBooks = async () => {
+    try {
+      setLoading(true); // Rozpoczynamy ładowanie
+      const res = await fetch(`https://openlibrary.org/search.json?q=harry%20potter&limit=${limit}&page=${page}`);
+      
+      if (!res.ok) {
+        throw new Error(`Błąd API: ${res.status} ${res.statusText}`);
       }
-    };
 
-    fetchBooks(); // Uruchomienie funkcji pobierania książek
-  }, []); // Uruchomienie tylko raz po załadowaniu komponentu
+      const data = await res.json();
+      // Sprawdzamy, czy w odpowiedzi znajdują się książki
+      if (data.docs) {
+        setBooks(data.docs); // Ustawiamy nowe książki dla nowej strony
+        setTotalBooks(data.num_found); // Ustawiamy łączną liczbę książek
+      } else {
+        throw new Error("Brak książek w odpowiedzi");
+      }
+    } catch (err: any) {
+      setError(`Błąd podczas pobierania książek: ${err.message}`);
+    } finally {
+      setLoading(false); // Zakończymy ładowanie
+    }
+  };
 
-  if (loading) {
+  // Ładowanie książek przy załadowaniu komponentu lub zmianie strony
+  useEffect(() => {
+    setBooks([]); // Czyszczenie książek przed załadowaniem nowych
+    fetchBooks();
+  }, [page]); // Zmieniamy stronę w zależności od numeru strony
+
+  // Funkcja do przejścia na poprzednią stronę
+  const goToPreviousPage = () => {
+    if (page > 1) {
+      setPage(page - 1);
+    }
+  };
+
+  // Funkcja do przejścia na następną stronę
+  const goToNextPage = () => {
+    if (books.length < totalBooks) {
+      setPage(page + 1);
+    }
+  };
+
+  if (loading && page === 1) {
     return <div className={styles.loading}>Ładowanie książek...</div>;
   }
 
@@ -57,10 +83,7 @@ export default function Books() {
 
           return (
             <div key={book.key} className={styles.bookCard}>
-              {/* Wyświetlanie okładki książki */}
-              {coverUrl && (
-                <img src={coverUrl} alt={book.title} className={styles.bookCover} />
-              )}
+              {coverUrl && <img src={coverUrl} alt={book.title} className={styles.bookCover} />}
               <h3 className={styles.bookTitle}>{book.title}</h3>
               <p className={styles.bookAuthor}>
                 {book.author_name ? book.author_name.join(", ") : "Autor nieznany"}
@@ -68,6 +91,29 @@ export default function Books() {
             </div>
           );
         })}
+      </div>
+
+      {/* Paginacja */}
+      <div className={styles.pagination}>
+        <button
+          onClick={goToPreviousPage}
+          disabled={page === 1}
+          className={styles.paginationButton}
+        >
+          Poprzednia
+        </button>
+
+        <span className={styles.pageInfo}>
+          Strona {page} z {Math.ceil(totalBooks / limit)}
+        </span>
+
+        <button
+          onClick={goToNextPage}
+          disabled={books.length >= totalBooks}
+          className={styles.paginationButton}
+        >
+          Następna
+        </button>
       </div>
     </div>
   );
